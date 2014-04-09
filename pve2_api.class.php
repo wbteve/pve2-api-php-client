@@ -46,7 +46,7 @@ class PVE2_API {
 		$this->pve_realm = $pve_realm;
 		$this->pve_password = $pve_password;
 
-		$this->print_debug = false;
+		$this->print_debug = true;
 
 		# Default this to null, so we can check later on if were logged in or not.
 		$this->pve_login_ticket = null;
@@ -90,7 +90,6 @@ class PVE2_API {
 		if (!$this->constructor_success) {
 			return false;
 		}
-
 		# Prepare login variables.
 		$login_postfields = array();
 		$login_postfields['username'] = $this->pve_username;
@@ -107,9 +106,10 @@ class PVE2_API {
 		curl_setopt($prox_ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($prox_ch, CURLOPT_POSTFIELDS, $login_postfields_string);
 		curl_setopt($prox_ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($prox_ch, CURLOPT_SSL_VERIFYHOST, false);
+		
 
 		$login_ticket = curl_exec($prox_ch);
-
 		curl_close($prox_ch);
 		unset($prox_ch);
 		unset($login_postfields_string);
