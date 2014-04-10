@@ -107,7 +107,7 @@ class PVE2_API {
 		curl_setopt($prox_ch, CURLOPT_POSTFIELDS, $login_postfields_string);
 		curl_setopt($prox_ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($prox_ch, CURLOPT_SSL_VERIFYHOST, false);
-		
+
 
 		$login_ticket = curl_exec($prox_ch);
 		curl_close($prox_ch);
@@ -219,7 +219,7 @@ class PVE2_API {
 				break;
 			default:
 				if ($this->print_debug === true) {
-					print("Error - Invalid HTTP Method specified.\n");	
+					print("Error - Invalid HTTP Method specified.\n");
 				}
 				return false;
 		}
@@ -228,6 +228,7 @@ class PVE2_API {
 		curl_setopt($prox_ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($prox_ch, CURLOPT_COOKIE, "PVEAuthCookie=".$this->pve_login_ticket['ticket']);
 		curl_setopt($prox_ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($prox_ch, CURLOPT_SSL_VERIFYHOST, false);
 
 		$action_response = curl_exec($prox_ch);
 
@@ -345,7 +346,7 @@ class PVE2_API {
 		return $this->pve_cluster_node_list;
 	}
 
-	
+
 	/*
 	 * bool|int get_next_vmid ()
 	 * Get Last VMID from a Cluster or a Node
