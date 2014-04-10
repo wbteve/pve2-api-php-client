@@ -46,7 +46,7 @@ class PVE2_API {
 		$this->pve_realm = $pve_realm;
 		$this->pve_password = $pve_password;
 
-		$this->print_debug = true;
+		$this->print_debug = false;
 
 		# Default this to null, so we can check later on if were logged in or not.
 		$this->pve_login_ticket = null;
